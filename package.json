@@ -9,9 +9,10 @@
 	"main": "./src/code-signal.js",
 	"version": "0.1.0",
 	"dependencies": {
+		"fs-extra": "9.0.1",
 		"playwright": "1.6.1",
-		"playwright-wrap":"0.2.0",
-		"playwright-init":"0.1.0",
+		"playwright-wrap":"0.4.0",
+		"playwright-init":"0.2.0",
 		"string-fn": "3.1.0",
 		"rambdax": "7.0.1"
 	},

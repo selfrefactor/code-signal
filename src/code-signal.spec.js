@@ -1,7 +1,13 @@
-import {codeSignal} from './code-signal'
+import {scrapeChallangeData} from './code-signal'
+import { ms } from 'string-fn'
+import { writeJson } from 'fs-extra'
+import { CHALLANGE_TEST_DATA } from './constants'
 
 const challengeID = 'F356AsueiKuhyYaAk'
+jest.setTimeout(ms('30 minutes'))
 
 test('happy', async () => {
-  await codeSignal(challengeID)
+  const result = await scrapeChallangeData(challengeID)
+
+  await writeJson(CHALLANGE_TEST_DATA, {data:result})
 })
