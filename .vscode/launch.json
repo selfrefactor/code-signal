@@ -18,6 +18,24 @@
       "disableOptimisticBPs": true,
       "console": "integratedTerminal",
       "internalConsoleOptions": "neverOpen"
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Parse challange data",
+      "program": "${workspaceRoot}/node_modules/jest/bin/jest.js",
+      "args": [
+        "--verbose", 
+        "-i", 
+        "--no-cache",
+        "src/_modules/parse-challenge-data.spec.js"
+      ],
+      "env":{
+        "HEADLESS": "OFF"
+      },
+      "disableOptimisticBPs": true,
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen"
     }
   ]
 }
