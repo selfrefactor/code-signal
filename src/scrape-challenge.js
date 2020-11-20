@@ -11,23 +11,30 @@ async function getRawData(_){
   const instructions = await instructionsEl.textContent()
   const testCasesTitlesEls = await _.page.$$(
     '.test-case--title'
-  ) 
+  )
+  let shouldStop = false
   const iterator = async (x, i) => {
+    if(shouldStop) return {}
     await x.click()
-    await delay(200)  
+    await delay(100)  
     const testCasesEls = await _.page.$$(
       '.test-case'
     )
     const testCaseTitle = await x.textContent()
     const testCaseText = await testCasesEls[i].textContent()
     await delay(100)
+    if(testCaseText.endsWith('Hidden')) {
+      shouldStop = true
+      return {}
+    }  
 
     return {rawText: testCaseText, title: testCaseTitle}
   }
 
   const testCases = await mapAsync(iterator, testCasesTitlesEls)
+  const filteredTestCases = testCases.filter(x => x.rawText)
 
-  return {replContent, instructions, testCases}
+  return {replContent, instructions, testCases: filteredTestCases}
 }
 
 function handleError(err){
