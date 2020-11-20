@@ -1,7 +1,7 @@
 # Code signal app
 
-- add wallaby
+## Wrong test inputs
 
-- add script to add new task based on code.signal url - use playwright
+qtsq77DyTtDrNs2dX
 
 `https://app.codesignal.com/tournaments/oED4FMHd6q2qbe7Q2/A`
