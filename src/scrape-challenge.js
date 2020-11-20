@@ -34,7 +34,7 @@ function handleError(err){
   console.log(err)
 }
 
-export async function scrapeChallangeData(challengeID){
+export async function scrapeChallenge(challengeID){
   const url  = `https://app.codesignal.com/challenge/${challengeID}`
   /*
     fallback, just like R.switcher.default, should be able to pass error

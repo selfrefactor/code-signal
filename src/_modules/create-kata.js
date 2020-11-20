@@ -1,5 +1,6 @@
 import { writeFile } from "fs-extra"
 import { interpolate, join, piped, tail , map, tap } from "rambdax"
+import { kebabCase } from "string-fn"
 
 function getExpectedDeclaration({expected}){
   return `const expected = ${expected}`
@@ -86,7 +87,7 @@ test('happy', () => {
 
 export async function createKata(dir, parsedData){
   const fileContent = getFileContent(parsedData)
-  const filePath = `${dir}/${parsedData.functionName}.js`
+  const filePath = `${dir}/${kebabCase(parsedData.functionName)}.spec.js`
 
   await writeFile(filePath, fileContent)
   fileContent
