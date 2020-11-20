@@ -40,13 +40,7 @@ function whenLast(testInput, rawText){
   return sk
 }
 
-function parseTestCase(testCase, testInputs){
-  const sortedTestInputs = sort((x, y) => {
-    const xPosition = testCase.rawText.indexOf(x)
-    const yPosition = testCase.rawText.indexOf(y)
-
-    return xPosition < yPosition ? -1 : 1
-  }, testInputs)
+function parseTestCase(testCase, sortedTestInputs){
   const hash = {}
 
   sortedTestInputs.forEach((x, i) => {
@@ -88,11 +82,18 @@ export function parseChallengeData(challengeData){
   )
   if (testInputs.length === 0) throw new Error('testInputs.length')
 
+  const sortedTestInputs = sort((x, y) => {
+    const xPosition = challengeData.testCases[0].rawText.indexOf(x)
+    const yPosition = challengeData.testCases[0].rawText.indexOf(y)
+
+    return xPosition < yPosition ? -1 : 1
+  }, testInputs)
+
   const testCases = piped(
     challengeData.testCases,
     filter(x => !x.rawText.endsWith('Hidden')),
-    map(x => parseTestCase(x, testInputs))
+    map(x => parseTestCase(x, sortedTestInputs))
   )
 
-  return {testCases, functionName}
+  return {testCases, functionName, sortedTestInputs}
 }

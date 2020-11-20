@@ -50,6 +50,11 @@
         }
       }
     ],
-    "functionName": "minimalBasketPrice"
+    "functionName": "minimalBasketPrice",
+    "sortedTestInputs": [
+      "maxPrice",
+      "vendorsDelivery",
+      "vendorsProducts"
+    ]
   }
 }

@@ -1,7 +1,7 @@
 import {scrapeChallangeData} from './code-signal'
 import { ms } from 'string-fn'
 import { writeJson } from 'fs-extra'
-import { CHALLANGE_TEST_DATA } from './constants'
+import { CHALLENGE_TEST_DATA } from './constants'
 
 const challengeID = 'F356AsueiKuhyYaAk'
 jest.setTimeout(ms('30 minutes'))
@@ -9,5 +9,5 @@ jest.setTimeout(ms('30 minutes'))
 test('happy', async () => {
   const result = await scrapeChallangeData(challengeID)
 
-  await writeJson(CHALLANGE_TEST_DATA, {data:result})
+  await writeJson(CHALLENGE_TEST_DATA, {data:result})
 })

@@ -3,6 +3,11 @@
 exports[`happy 1`] = `
 Object {
   "functionName": "minimalBasketPrice",
+  "sortedTestInputs": Array [
+    "maxPrice",
+    "vendorsDelivery",
+    "vendorsProducts",
+  ],
   "testCases": Array [
     Object {
       "expected": "[1, 2]",
