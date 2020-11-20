@@ -16,18 +16,26 @@ function getDeclarations(sortedTestInputs, testCase){
 const restCasesTemplate = `
   Inputs:
 
-  {{inputs}}
+{{inputs}}
 
   Expected: 
   
-  {{expected}}
-`.trim()
+{{expected}}
+`
 
 function getRestTestCases(testCases){
   return piped(
     testCases,
     tail,
-    map(x => interpolate(restCasesTemplate, {expected: JSON.stringify(x.expected), inputs: JSON.stringify(x.testInputs)})),
+    map(
+      testCase =>{
+        let inputs = ''
+        map((x, prop)=>{
+          inputs += `const ${prop} = ${x}\n`
+        }, testCase.testInputs)
+        return interpolate(restCasesTemplate, {inputs, expected: `const expected = ${testCase.expected}`})
+      }
+    ),
     join('\n===\n')
   )
 }
@@ -43,16 +51,17 @@ function getInputLines(sortedTestInputs){
 function getFileContent({sortedTestInputs,functionName, testCases}){
   const template = `
 function {{name}}(
-  {{inputLines}}
+{{inputLines}}
 ){
   
   return
 }
 
 test('happy', () => {
-  {{declarations}}
+{{declarations}}
+
   const result = {{name}}(
-    {{inputLines}}
+{{inputLines}}
   )
 
   {{expectedDeclaration}}    
@@ -61,9 +70,7 @@ test('happy', () => {
 
 
 /*
-
   {{restTestCases}}
-
 */
 `.trim()
 
