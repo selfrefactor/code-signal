@@ -4,13 +4,14 @@
     {
       "type": "node",
       "request": "launch",
-      "name": "Jest",
+      "name": "Run challenge",
       "program": "${workspaceRoot}/node_modules/jest/bin/jest.js",
       "args": [
         "--verbose", 
         "-i", 
         "--no-cache",
-        "src/code-signal.spec.js"
+        "src/run-challenge.spec.js",
+        "qtsq77DyTtDrNs2dX"
       ],
       "env":{
         "HEADLESS": "OFF"

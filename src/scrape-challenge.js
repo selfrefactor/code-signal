@@ -7,8 +7,6 @@ async function getRawData(_){
   await _.waitFor(replSelector)
   const replContentEl = await _.page.$(replSelector)
   const replContent  = await replContentEl.textContent()
-  const instructionsEl = await _.page.$('[class="-layout-v -fit"]')
-  const instructions = await instructionsEl.textContent()
   const testCasesTitlesEls = await _.page.$$(
     '.test-case--title'
   )
@@ -34,7 +32,7 @@ async function getRawData(_){
   const testCases = await mapAsync(iterator, testCasesTitlesEls)
   const filteredTestCases = testCases.filter(x => x.rawText)
 
-  return {replContent, instructions, testCases: filteredTestCases}
+  return {replContent, testCases: filteredTestCases}
 }
 
 function handleError(err){

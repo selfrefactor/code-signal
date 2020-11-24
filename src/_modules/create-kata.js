@@ -15,12 +15,10 @@ function getDeclarations(sortedTestInputs, testCase){
 }
 
 const restCasesTemplate = `
-  Inputs:
+  Inputs/Expected:
 
 {{inputs}}
 
-  Expected: 
-  
 {{expected}}
 `
 
@@ -90,5 +88,4 @@ export async function createKata(dir, parsedData){
   const filePath = `${dir}/${kebabCase(parsedData.functionName)}.spec.js`
 
   await writeFile(filePath, fileContent)
-  fileContent
 }

@@ -91,7 +91,6 @@ export function parseChallengeData(challengeData){
 
   const testCases = piped(
     challengeData.testCases,
-    // filter(x => !x.rawText.endsWith('Hidden')),
     map(x => parseTestCase(x, sortedTestInputs))
   )
 
