@@ -6,6 +6,7 @@ import { createKata } from "./_modules/create-kata"
 import {KATA_DIR} from './constants'
 import {replSelector, getRawData} from './scrape-challenge'
 import {playwrightInit, wrap} from 'playwright-wrap'
+import { parseChallengeData } from "./_modules/parse-challenge-data";
 
 const URL_BASE = 'https://app.codesignal.com'
 const LOGIN = `${URL_BASE}/login`
@@ -28,13 +29,25 @@ const TASK = '.tournament_task--task-status'
 async function isCodewriting(_){
   const allModes = await _.page.$$(MODE)
   const currentMode = await allModes[1].textContent()
-  return currentMode.includes('codewriting')
+
+  return currentMode === "codewriting"
 }
 
-const tasksIndexes = ['A','B','C','D','E', 'F', 'H']
+const tasksIndexes = ['B','C','D','E', 'F', 'H']
 
-async function scrapeTask(_, i, isFirst = false){
+async function scrapeTask(_, i, tournamentID, isFirst = false){
+  const url = `${URL_BASE}/tournaments/${tournamentID}/${tasksIndexes[i]}`
+  
+  if(!isFirst){
+    await _.goto(url)
+    await _.waitFor(replSelector)
+  }
 
+  if(!(await isCodewriting(_))) return
+
+  const scrapeData = await getRawData(_)
+  const parsedData = parseChallengeData(scrapeData)
+  await createKata(KATA_DIR, parsedData)
 }
 
 export async function runTournament(){
@@ -63,10 +76,8 @@ export async function runTournament(){
   await _.goto(TOURNAMENT(tournamentID))
   await _.waitFor(replSelector)
   const numTasks = await _.count(TASK)
-  if(await isCodewriting(_)){
-    await scrapeTask(_, 0, true)
-  }
+  await scrapeTask(_, 0, tournamentID, true)
 
-  await mapAsync(async i => await scrapeTask(_, i), range(1,numTasks))
+  await mapAsync(async i => await scrapeTask(_, i, tournamentID), range(0,numTasks-1))
   console.timeEnd('tournament')
 }
