@@ -4,6 +4,25 @@
     {
       "type": "node",
       "request": "launch",
+      "name": "Run tournament",
+      "program": "${workspaceRoot}/node_modules/jest/bin/jest.js",
+      "args": [
+        "--verbose", 
+        "-i", 
+        "--no-cache",
+        "src/run-tournament.spec.js",
+        "u4QBs9Wpye9FjYHsN"
+      ],
+      "env":{
+        "HEADLESS": "OFF"
+      },
+      "disableOptimisticBPs": true,
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen"
+    },
+    {
+      "type": "node",
+      "request": "launch",
       "name": "Run challenge",
       "program": "${workspaceRoot}/node_modules/jest/bin/jest.js",
       "args": [

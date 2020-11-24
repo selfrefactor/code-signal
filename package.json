@@ -2,6 +2,7 @@
   "name": "code-signal",
   "scripts": {
     "on": "jest src/run-challenge.spec.js",
+    "tour": "jest src/run-tournament.spec.js",
     "test": "yarn test:d&&yarn test:m",
     "test:d": "jest src/tests/desktop.spec.js",
     "test:m": "jest src/tests/mobile.spec.js"
@@ -12,6 +13,7 @@
   "dependencies": {
     "fs-extra": "9.0.1",
     "playwright": "1.6.1",
+    "env-fn": "2.1.1",
     "playwright-wrap": "0.4.0",
     "playwright-init": "0.2.0",
     "string-fn": "3.1.0",

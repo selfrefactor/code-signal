@@ -1,9 +1,9 @@
 import { playwrightRun } from 'playwright-wrap'
 import { delay, mapAsync } from 'rambdax'
 
-const replSelector = '.lines-content'
+export const replSelector = '.lines-content'
 
-async function getRawData(_){
+export async function getRawData(_){
   await _.waitFor(replSelector)
   const replContentEl = await _.page.$(replSelector)
   const replContent  = await replContentEl.textContent()
