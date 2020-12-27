@@ -1,4 +1,4 @@
-import { piped, replace } from 'rambdax'
+import { piped, remove, replace } from 'rambdax'
 import {outputFile} from 'fs-extra'
 function refactorToRequire(input){
   return input.split('\n')
@@ -7,6 +7,7 @@ function refactorToRequire(input){
 
     const newLine /*?*/ = piped(
       line,
+      remove(';'),
       replace('import ', 'const '),
       replace('} from', '} = require('),
     )
@@ -17,13 +18,7 @@ function refactorToRequire(input){
 }
 
 const testInput = `
-import { outputJson } from 'fs-extra'
-import { playwrightInit } from 'playwright-init'
-import { wrap } from 'playwright-wrap'
-import { delay, mapAsync } from 'rambdax'
-
-import { getRepoData } from './get-repo-data'
-import { sortResult } from './sort-result'
+import { dropLast, filter, piped, remove, split } from "rambdax";
 `.trim()
 
 test('happy',async () => {
