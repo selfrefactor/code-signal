@@ -1,4 +1,4 @@
-import { piped, remove, replace } from 'rambdax'
+import { piped, remove, replace, trim } from 'rambdax'
 import {outputFile} from 'fs-extra'
 function refactorToRequire(input){
   return input.split('\n')
@@ -7,8 +7,10 @@ function refactorToRequire(input){
 
     const newLine /*?*/ = piped(
       line,
+      trim,
       remove(';'),
       replace('import ', 'const '),
+      replace('} from ', '} = require('),
       replace('} from', '} = require('),
     )
       
