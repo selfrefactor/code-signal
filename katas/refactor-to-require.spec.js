@@ -19,18 +19,19 @@ function refactorToRequire(input){
 }
 
 const testInput = `
-import dayjs from 'dayjs'
-import { path } from 'rambdax'
+import { existsSync } from 'fs'
+import { outputJson, readJson } from 'fs-extra'
+import { mapAsync, ok, pick } from 'rambdax'
+
+import { filterRepo } from './_modules/filter-repo'
+import { getRepo } from './_modules/get-repo'
 `.trim()
 
 test('happy',async () => {
   const result = refactorToRequire(testInput)
-  console.log({__filename})
-  /*
-    Big issue with Wallaby and __dirname __filename process.cwd()
-  */
+  
   await outputFile(
-    `/home/deyan/repos/code-signal/katas/refactor-to-require.txt`,
+    `${__dirname}/refactor-to-require.txt`,
     result
   )
 })
