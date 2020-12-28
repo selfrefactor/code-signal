@@ -4,10 +4,5 @@ module.exports = function () {
     filesWithNoCoverageCalculated: ['src/**/*.js'],
     runMode: 'onsave',
     autoDetect: true,
-    env: {
-      params: {
-        env: 'WALLABY=ON'
-      }
-    }
   }
 }

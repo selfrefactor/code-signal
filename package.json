@@ -1,6 +1,7 @@
 {
   "name": "code-signal",
   "scripts": {
+    "x":"jest src/_modules/create-kata.spec.js",
     "on": "jest src/run-challenge.spec.js",
     "tour": "jest src/run-tournament.spec.js",
     "test": "yarn test:d&&yarn test:m",
@@ -26,6 +27,9 @@
     "@babel/core": "7.12.3",
     "@babel/plugin-proposal-object-rest-spread": "7.12.1",
     "@babel/preset-env": "7.12.1"
+  },
+  "jest": {
+    "watchPathIgnorePatterns": ["/src/"]
   },
   "repository": "https://github.com/selfrefactor/code-signal",
   "license": "MIT",
