@@ -10,8 +10,7 @@ function refactorToRequire(input){
       trim,
       remove(';'),
       replace('import ', 'const '),
-      replace('} from ', '} = require('),
-      replace('} from', '} = require('),
+      replace('from ', ' = require('),
     )
       
     return `${newLine})`
@@ -20,7 +19,8 @@ function refactorToRequire(input){
 }
 
 const testInput = `
-import { dropLast, filter, piped, remove, split } from "rambdax";
+import dayjs from 'dayjs'
+import { path } from 'rambdax'
 `.trim()
 
 test('happy',async () => {
