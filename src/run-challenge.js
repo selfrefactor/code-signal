@@ -7,7 +7,9 @@ import { scrapeChallenge } from './scrape-challenge'
 
 export async function runChallenge(){
   console.time('challenge')
-  const challengeID = last(process.argv)
+  const challengeIDRaw = last(process.argv)
+  const challengeID = challengeIDRaw.startsWith('http') ? last(challengeIDRaw.split('/')): challengeIDRaw
+
   const scrapeData = await scrapeChallenge(challengeID)
   const parsedData = parseChallengeData(scrapeData)
   await createKata(KATA_DIR, parsedData)

@@ -41,9 +41,6 @@ function handleError(err){
 
 export async function scrapeChallenge(challengeID){
   const url  = `https://app.codesignal.com/challenge/${challengeID}`
-  /*
-    fallback, just like R.switcher.default, should be able to pass error
-  */
   const rawData = await playwrightRun({fn: getRawData, fallback: null, url, handleError})
   if(!rawData) throw new Error('!rawData')
   

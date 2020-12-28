@@ -56,7 +56,8 @@ async function scrapeTask(
 
 export async function runTournament(){
   console.time('tournament')
-  const tournamentID = last(process.argv)
+  const tournamentIDRaw = last(process.argv)
+  const tournamentID = tournamentIDRaw.startsWith('http') ? last(tournamentIDRaw.split('/')): tournamentIDRaw
   const options = {
     headless      : process.env.HEADLESS !== 'OFF',
     logFlag       : false,
